@@ -1,1 +1,1 @@
-Deze repository wordt gebruikt voor het maken van de CSD opdrachten van jaar 2 van de HKU.
+This respository is used to store assignments for HKU CSD year 2.

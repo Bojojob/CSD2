@@ -8,6 +8,7 @@ void ofApp::setup(){
 }
 
 void ofApp::update(){
+	//get new frame
 	grabber.update();
 	if(grabber.isFrameNew()){
 		flow.calcOpticalFlow(grabber);
@@ -30,6 +31,7 @@ void ofApp::update(){
 }
 
 void ofApp::draw(){
+	//draws rectangles at keypoint positions
 	grabber.draw(0,0);
 	flow.draw();
 	if(ofGetMousePressed()){
@@ -38,12 +40,14 @@ void ofApp::draw(){
 	}
 }
 
-void ofApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseDragged(int x, int y, int button)
+	//reset keypoints in designated area
 	ofVec2f p2(x,y);
 	rect.set(p1,p2.x-p1.x,p2.y-p1.y);
 }
 
 void ofApp::mousePressed(int x, int y, int button){
+	//reset keypoints
 	p1.set(x,y);
 
 	//If this is turned on, the detected motion gets printed
@@ -51,6 +55,7 @@ void ofApp::mousePressed(int x, int y, int button){
 }
 
 void ofApp::mouseReleased(int x, int y, int button){
+	//If the mouse isn't pressed, get keypoint data
 	ofVec2f p2(x,y);
 	rect.set(p1,p2.x-p1.x,p2.y-p1.y);
 	vector<KeyPoint> keypoints;

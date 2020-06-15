@@ -8,4 +8,4 @@ Het derde deel is de software, die niet erg uitgebreid is. Ik zie dit ontwerp ve
 De chimes die gebruikt worden zijn gestemd als een stapeling van kwinten.
 
 
-[![Demonstration video](https://img.youtube.com/vi/vhwfM2Dn4/0.jpg)](https://www.youtube.com/watch?v=vhwfM2Dn4)
+[![Demonstration video](https://img.youtube.com/vi/V_vhwfM2Dn4/0.jpg)](https://www.youtube.com/watch?v=V_vhwfM2Dn4)

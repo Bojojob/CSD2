@@ -13,6 +13,12 @@ public:
     void mousePressed(int x, int y, int button);
     void mouseReleased(int x, int y, int button);
 
+    float getMotionX();
+    float getMotionY();
+
+    float motionX;
+    float motionY;
+
     ofVideoGrabber grabber;
     cv::Mat grabberGray;
     ofxCv::FlowPyrLK flow;

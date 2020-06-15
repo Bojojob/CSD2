@@ -14,16 +14,22 @@ void ofApp::update(){
 		flow.calcOpticalFlow(grabber);
 
 		if (printFlow == true) {
-			//ofxCv function that detects motion
-			float motionX = flow.getMotion()[0][0];
-			float motionY = flow.getMotion()[0][1];
 
+			//std::cout << "\n Horizontal motion: " << getMotionX();
+			//std::cout << "\n Vertical motion: " << getMotionY();
+
+
+			getMotionX();
+			getMotionY();
 			if (motionX >= 1) {
 				std::cout << "\n Horizontal motion: " << motionX;
 			}
 			if (motionY >= 1) {
 				std::cout << "\n Vertical motion: " << motionY;
 			}
+
+
+
 		}
 
 
@@ -40,7 +46,19 @@ void ofApp::draw(){
 	}
 }
 
-void ofApp::mouseDragged(int x, int y, int button)
+
+float ofApp::getMotionX() {
+	//ofxCv function that detects motion
+	motionX = flow.getMotion()[0][0];
+	return motionX;
+}
+
+float ofApp::getMotionY() {
+	motionY = flow.getMotion()[0][1];
+	return motionY;
+}
+
+void ofApp::mouseDragged(int x, int y, int button){
 	//reset keypoints in designated area
 	ofVec2f p2(x,y);
 	rect.set(p1,p2.x-p1.x,p2.y-p1.y);

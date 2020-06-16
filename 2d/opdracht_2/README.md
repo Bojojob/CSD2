@@ -2,6 +2,8 @@ This assignment contains the documentation and concept for a audiovisual install
 The working title is Can you hear the sound of my voice?
 
 Have a look at documentation.pdf to read about the concept.
+
+
 Click the image below to see a demo of the code.
 
 

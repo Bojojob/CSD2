@@ -13,4 +13,5 @@ float Saw::tick(double samplerate) {
   sample = ((fmod(phase,1)*2)-1)*amplitude;
 
   return getSample();
+  
 }

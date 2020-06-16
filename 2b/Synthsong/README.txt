@@ -1,1 +1,0 @@
-This folder contains the CSD2b Synthsong assignment.

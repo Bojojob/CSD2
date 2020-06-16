@@ -14,4 +14,5 @@ float Sine::tick(double samplerate) {
   sample = amplitude * (sin(phase * PI_2));
 
   return getSample();
+  
 }

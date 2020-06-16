@@ -8,5 +8,6 @@ public:
   ~Sine();
 
   float tick(double samplerate);
+
 };
 #endif

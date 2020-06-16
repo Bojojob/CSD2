@@ -17,4 +17,5 @@ float Square::tick(double samplerate) {
     sample = -amplitude;
 
   return getSample();
+  
 }

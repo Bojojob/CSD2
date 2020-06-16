@@ -8,5 +8,6 @@ public:
   ~Saw();
 
   float tick(double samplerate);
+
 };
 #endif

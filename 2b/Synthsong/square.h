@@ -8,5 +8,6 @@ public:
   ~Square();
 
   float tick(double samplerate);
+
 };
 #endif

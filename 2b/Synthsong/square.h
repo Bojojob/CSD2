@@ -7,7 +7,7 @@ public:
   Square();
   ~Square();
 
-  float tick(double samplerate);
+  void tick();
 
 };
 #endif

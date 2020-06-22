@@ -7,7 +7,7 @@ Square::Square() : Oscillator() {
 Square::~Square() {
 }
 
-float Square::tick(double samplerate) {
+void Square::tick() {
   phase += frequency / samplerate;
   sample = 1 * (sin(phase * PI_2));
 
@@ -15,7 +15,4 @@ float Square::tick(double samplerate) {
     sample = amplitude;
   else
     sample = -amplitude;
-
-  return getSample();
-  
 }

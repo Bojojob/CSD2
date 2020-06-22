@@ -7,7 +7,7 @@ public:
   Sine();
   ~Sine();
 
-  float tick(double samplerate);
+  void tick();
 
 };
 #endif

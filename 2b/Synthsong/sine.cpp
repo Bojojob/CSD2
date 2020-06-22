@@ -7,12 +7,8 @@ Sine::Sine() : Oscillator() {
 Sine::~Sine() {
 }
 
-// sine wave formula
-float Sine::tick(double samplerate) {
+void Sine::tick() {
 
   phase += frequency / samplerate;
   sample = amplitude * (sin(phase * PI_2));
-
-  return getSample();
-  
 }

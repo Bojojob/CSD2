@@ -8,10 +8,8 @@ Saw::~Saw() {
 }
 
 // saw wave formula
-float Saw::tick(double samplerate) {
+void Saw::tick() {
   phase += frequency / samplerate;
   sample = ((fmod(phase,1)*2)-1)*amplitude;
 
-  return getSample();
-  
 }

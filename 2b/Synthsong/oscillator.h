@@ -14,12 +14,13 @@ public:
   //getters and setters
   void setFrequency(float frequency);
   void setAmplitude(float amplitude);
+  void setSamplerate(float samplerate);
 
   //return the current sample
   float getSample();
 
 protected:
-  float amplitude = 0.1;
+  float amplitude;
   float frequency;
   float phase;
   // contains the current sample

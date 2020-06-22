@@ -7,7 +7,7 @@ public:
   Saw();
   ~Saw();
 
-  float tick(double samplerate);
+  void tick();
 
 };
 #endif

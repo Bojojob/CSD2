@@ -7,20 +7,22 @@
 
 class Synthesizer {
 public:
-  Synthesizer(float samplerate);
+  Synthesizer();
   ~Synthesizer();
 
   Sine sine;
   Square square;
   Saw saw;
 
+  void setSamplerate(float samplerate);
   void setFrequency(float frequency);
   void setAmplitude(float amplitude);
 
   float getSample();
+  void tick();
 
 protected:
-  float amplitude = 0.1;
+  float amplitude;
   float frequency;
   float sample;
   float samplerate;

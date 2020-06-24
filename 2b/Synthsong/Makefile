@@ -4,8 +4,8 @@ LDFLAGS= -ljack
 
 all: synthsong
 
-synthsong : jack_module.o oscillator.o sine.o square.o saw.o synthesizer.o main.o
-	$(CC) -o $@ $(CFLAGS) jack_module.o oscillator.o sine.o square.o saw.o synthesizer.o main.o $(LDFLAGS)
+synthsong : jack_module.o oscillator.o sine.o square.o saw.o subtractive_synthesizer.o fm_synthesizer.o main.o
+	$(CC) -o $@ $(CFLAGS) jack_module.o oscillator.o sine.o square.o saw.o subtractive_synthesizer.o fm_synthesizer.o main.o $(LDFLAGS)
 
 .cpp.o:
 	$(CC) -c $< $(CFLAGS)

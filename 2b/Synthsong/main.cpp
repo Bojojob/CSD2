@@ -2,48 +2,41 @@
 #include <thread>
 #include "jack_module.h"
 #include "math.h"
-#include "sine.h"
-#include "square.h"
-#include "saw.h"
-#include "synthesizer.h"
-
+#include "subtractive_synthesizer.h"
+#include "fm_synthesizer.h"
 
 
 #define PI_2 6.28318530717959
+
+bool subSynthSwitch = true;
+bool fmSynthSwitch = false;
 
 int main(int argc,char **argv)
 {
   JackModule jack;
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
-/*
-  Sine sine;
-  sine.setFrequency(880);
-  sine.setSamplerate(samplerate);
 
-  Square square;
-  square.setFrequency(440);
-  square.setSamplerate(samplerate);
+  subtractive_synthesizer subSynth;
+  subSynth.setSamplerate(samplerate);
+  subSynth.setFrequency(220);
 
-
-  Saw saw;
-  saw.setFrequency(660);
-  saw.setSamplerate(samplerate);
-*/
-
-  Synthesizer synthesizer;
-  synthesizer.setSamplerate(samplerate);
-  synthesizer.setFrequency(440);
-
-
+  fm_synthesizer fmSynth;
+  fmSynth.setSamplerate(samplerate);
+  fmSynth.setFrequency(440);
+  fmSynth.setFmRatio(4);
+  fmSynth.setFmAmount(2000);
+  fmSynth.setAmplitude(0);
 
   //assign a function to the JackModule::onProces
   jack.onProcess = [&](jack_default_audio_sample_t *inBuf,
      jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
 
     for(unsigned int i = 0; i < nframes; i++) {
-      outBuf[i] = synthesizer.getSample();
-      synthesizer.tick();
+      outBuf[i] = (subSynth.getSample() + fmSynth.getSample());
+      fmSynth.updateFrequency();
+      subSynth.tick();
+      fmSynth.tick();
     }
 
     return 0;
@@ -61,6 +54,12 @@ int main(int argc,char **argv)
       case 'q':
         running = false;
         jack.end();
+        break;
+      case 's':
+        subSynthSwitch = !subSynthSwitch;
+        subSynth.setAmplitude(subSynthSwitch);
+        fmSynthSwitch = !fmSynthSwitch;
+        fmSynth.setAmplitude(fmSynthSwitch);
         break;
     }
   }

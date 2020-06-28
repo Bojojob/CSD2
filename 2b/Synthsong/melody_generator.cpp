@@ -2,13 +2,11 @@
 #include <thread>
 #include <chrono>
 #include "melody_generator.h"
-#include <iostream>
-
 
 MelodyGenerator::MelodyGenerator()  {
   //set seed for random number generation
   srand((unsigned int)time(NULL));
-  //noteAmount is set to 4 by default
+  //noteAmount is set to 8 by default
   noteAmount = 8;
 }
 
@@ -34,7 +32,7 @@ float MelodyGenerator::getFrequency()  {
   return frequency;
 }
 
-//generates melody by picking random notes from the scale
+//generates melody by picking random notes from scale
 void MelodyGenerator::generateMelody()  {
   std::cout << "Generating a melody that is " << noteAmount << " notes long.\n";
   for(int i = 0; i < noteAmount; i++) {

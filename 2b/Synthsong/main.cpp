@@ -34,7 +34,7 @@ int main(int argc,char **argv)
 
   //sets frequency for the melodyGen so the synths produce sound on startup
   MelodyGenerator melodyGen;
-  melodyGen.setFrequency(261.63);
+  melodyGen.setFrequency(130.8);
 
 
   //assign a function to the JackModule::onProces
@@ -76,9 +76,9 @@ int main(int argc,char **argv)
         std::cout << "\nThis indicates how many notes will be generated.\n";
         std::cin >> input;
         while (!std::cin.good()) {
-          std::cin.clear();
           std::cin.ignore(INT_MAX, '\n');
           std::cout << "That's not what I was looking for...\n";
+          input = 8;
         }
         melodyGen.setNoteAmount(input);
         break;

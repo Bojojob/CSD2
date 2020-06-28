@@ -1,18 +1,17 @@
 #include <iostream>
 #include <thread>
 #include <climits>
-#include "jack_module.h"
 #include "math.h"
+#include "jack_module.h"
 #include "subtractive_synthesizer.h"
 #include "fm_synthesizer.h"
 #include "melody_generator.h"
-
 
 #define PI_2 6.28318530717959
 
 //switches used to mute and unmute the synths
 bool subSynthSwitch = false;
-bool fmSynthSwitch = false;
+bool fmSynthSwitch = true;
 //for storing input
 int input;
 
@@ -35,8 +34,7 @@ int main(int argc,char **argv)
 
   //sets frequency for the melodyGen so the synths produce sound on startup
   MelodyGenerator melodyGen;
-  melodyGen.setFrequency(220);
-  melodyGen.setNoteAmount(4);
+  melodyGen.setFrequency(261.63);
 
 
   //assign a function to the JackModule::onProces
@@ -105,4 +103,4 @@ int main(int argc,char **argv)
 
   //end the program
   return 0;
-} // main()
+}

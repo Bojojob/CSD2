@@ -2,6 +2,8 @@
 #define _FM_SYNTHESIZER_H_
 #include "sine.h"
 
+//a simple two operator fm synth
+
 class Fm_synthesizer {
 public:
   Fm_synthesizer();
@@ -11,8 +13,8 @@ public:
   Sine operator2;
 
   void setSamplerate(float samplerate);
-  void setFrequency(float frequency);
   void setOp2Frequency();
+  void setFrequency(float frequency);
   void setFmRatio(float fmRatio);
   void setFmAmount(float fmAmount);
   void setAmplitude(float amplitude);

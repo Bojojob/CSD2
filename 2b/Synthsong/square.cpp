@@ -9,10 +9,11 @@ Square::~Square() {
 
 void Square::tick() {
   phase += frequency / samplerate;
-  sample = 1 * (sin(phase * PI_2));
+  sample = sin(M_PI * 2 * phase);
 
-  if (sample > 0.0)
+  if (sample >= 0.0)
     sample = amplitude;
   else
     sample = -amplitude;
+
 }

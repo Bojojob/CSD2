@@ -1,4 +1,3 @@
-#include <iostream>
 #include "fm_synthesizer.h"
 
 Fm_synthesizer::Fm_synthesizer()  {
@@ -22,15 +21,18 @@ void Fm_synthesizer::setSamplerate(float samplerate) {
   operator2.setSamplerate(samplerate);
 }
 
+//like many fm synths the modulating operators are set trough ratio
+//i.e 1.5 for a fifth or 2 for an octave
+//setOp2Frequency is a seperate function so it can be called in setFrequency and setFmRatio
+void Fm_synthesizer::setOp2Frequency()  {
+  op2Frequency = frequency * fmRatio;
+  operator2.setFrequency(op2Frequency);
+}
+
 void Fm_synthesizer::setFrequency(float frequency) {
   this->frequency = frequency;
 
   setOp2Frequency();
-}
-
-void Fm_synthesizer::setOp2Frequency()  {
-  op2Frequency = frequency * fmRatio;
-  operator2.setFrequency(op2Frequency);
 }
 
 void Fm_synthesizer::setFmRatio(float fmRatio)  {
@@ -53,6 +55,7 @@ float Fm_synthesizer::getSample() {
 }
 
 void Fm_synthesizer::updateFrequency()  {
+  //uses operator 2 as the modulator of operator 1 to achieve fm synthesis
   op1Frequency = frequency + (operator2.getSample() * fmAmount);
   operator1.setFrequency(op1Frequency);
 }

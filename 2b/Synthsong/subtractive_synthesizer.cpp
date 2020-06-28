@@ -1,5 +1,5 @@
-#include <iostream>
 #include "subtractive_synthesizer.h"
+#include <iostream>
 
 Subtractive_synthesizer::Subtractive_synthesizer()  {
   amplitude = 1.0;
@@ -8,6 +8,7 @@ Subtractive_synthesizer::Subtractive_synthesizer()  {
   Sine sine;
   Square square;
   Saw saw;
+
 }
 
 Subtractive_synthesizer::~Subtractive_synthesizer()  {

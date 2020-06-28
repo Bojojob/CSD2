@@ -10,5 +10,5 @@ Sine::~Sine() {
 void Sine::tick() {
 
   phase += frequency / samplerate;
-  sample = amplitude * (sin(phase * PI_2));
+  sample = sin(M_PI * 2 * phase) * amplitude;
 }

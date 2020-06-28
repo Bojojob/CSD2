@@ -1,15 +1,20 @@
 #include <iostream>
 #include <thread>
+#include <climits>
 #include "jack_module.h"
 #include "math.h"
 #include "subtractive_synthesizer.h"
 #include "fm_synthesizer.h"
+#include "melody_generator.h"
 
 
 #define PI_2 6.28318530717959
 
-bool subSynthSwitch = true;
+//switches used to mute and unmute the synths
+bool subSynthSwitch = false;
 bool fmSynthSwitch = false;
+//for storing input
+int input;
 
 int main(int argc,char **argv)
 {
@@ -17,16 +22,22 @@ int main(int argc,char **argv)
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
 
-  subtractive_synthesizer subSynth;
+  //initialize the synthesizers and the melody generator
+  Subtractive_synthesizer subSynth;
+  subSynth.setAmplitude(0);
   subSynth.setSamplerate(samplerate);
   subSynth.setFrequency(220);
 
-  fm_synthesizer fmSynth;
+  Fm_synthesizer fmSynth;
   fmSynth.setSamplerate(samplerate);
-  fmSynth.setFrequency(440);
-  fmSynth.setFmRatio(4);
-  fmSynth.setFmAmount(2000);
-  fmSynth.setAmplitude(0);
+  fmSynth.setFmRatio(3);
+  fmSynth.setFmAmount(1500);
+
+  //sets frequency for the melodyGen so the synths produce sound on startup
+  MelodyGenerator melodyGen;
+  melodyGen.setFrequency(220);
+  melodyGen.setNoteAmount(4);
+
 
   //assign a function to the JackModule::onProces
   jack.onProcess = [&](jack_default_audio_sample_t *inBuf,
@@ -34,9 +45,12 @@ int main(int argc,char **argv)
 
     for(unsigned int i = 0; i < nframes; i++) {
       outBuf[i] = (subSynth.getSample() + fmSynth.getSample());
+      //the frequency of the fm synth must be updated at audio rate
+      fmSynth.setFrequency(melodyGen.getFrequency());
+      subSynth.setFrequency(melodyGen.getFrequency());
       fmSynth.updateFrequency();
-      subSynth.tick();
       fmSynth.tick();
+      subSynth.tick();
     }
 
     return 0;
@@ -44,22 +58,47 @@ int main(int argc,char **argv)
 
   jack.autoConnect();
 
-  //keep the program running and listen for user input, q = quit
-  std::cout << "\n\nPress 'q' when you want to quit the program.\n";
+  //information for the user
+  std::cout << "\nPress 'm' to generate a melody.\n";
+  std::cout << "\nPress 'n' to change the length of the melody.\n";
+  std::cout << "\nPress 's' to mute and unmute the subtractive Synthesizer.\n";
+  std::cout << "\nPress 'f' to mute and unmute the fm Synthesizer.\n";
+  std::cout << "\nPress 'r' to generate a random fm patch.\n";
+  std::cout << "\nPress 'q' to quit the program.\n";
   bool running = true;
   while (running)
   {
     switch (std::cin.get())
     {
-      case 'q':
-        running = false;
-        jack.end();
+      case 'm':
+      melodyGen.generateMelody();
+      break;
+      case 'n':
+        std::cout << "Enter a number,";
+        std::cout << "\nThis indicates how many notes will be generated.\n";
+        std::cin >> input;
+        while (!std::cin.good()) {
+          std::cin.clear();
+          std::cin.ignore(INT_MAX, '\n');
+          std::cout << "That's not what I was looking for...\n";
+        }
+        melodyGen.setNoteAmount(input);
         break;
       case 's':
         subSynthSwitch = !subSynthSwitch;
         subSynth.setAmplitude(subSynthSwitch);
+        break;
+      case 'f':
         fmSynthSwitch = !fmSynthSwitch;
         fmSynth.setAmplitude(fmSynthSwitch);
+        break;
+      case 'r':
+        fmSynth.setFmRatio(rand() % 8);
+        fmSynth.setFmAmount(rand() % 10000);
+        break;
+        case 'q':
+        running = false;
+        jack.end();
         break;
     }
   }

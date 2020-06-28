@@ -1,12 +1,11 @@
-#ifndef _fm_synthesizer_H_
-#define _fm_synthesizer_H_
-#include <iostream>
+#ifndef _FM_SYNTHESIZER_H_
+#define _FM_SYNTHESIZER_H_
 #include "sine.h"
 
-class fm_synthesizer {
+class Fm_synthesizer {
 public:
-  fm_synthesizer();
-  ~fm_synthesizer();
+  Fm_synthesizer();
+  ~Fm_synthesizer();
 
   Sine operator1;
   Sine operator2;

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "subtractive_synthesizer.h"
 
-subtractive_synthesizer::subtractive_synthesizer()  {
+Subtractive_synthesizer::Subtractive_synthesizer()  {
   amplitude = 1.0;
   sample = 0;
 
@@ -10,11 +10,11 @@ subtractive_synthesizer::subtractive_synthesizer()  {
   Saw saw;
 }
 
-subtractive_synthesizer::~subtractive_synthesizer()  {
+Subtractive_synthesizer::~Subtractive_synthesizer()  {
 
 }
 
-void subtractive_synthesizer::setSamplerate(float samplerate) {
+void Subtractive_synthesizer::setSamplerate(float samplerate) {
   this->samplerate = samplerate;
 
   sine.setSamplerate(samplerate);
@@ -22,7 +22,7 @@ void subtractive_synthesizer::setSamplerate(float samplerate) {
   saw.setSamplerate(samplerate);
 }
 
-void subtractive_synthesizer::setFrequency(float frequency) {
+void Subtractive_synthesizer::setFrequency(float frequency) {
   this->frequency = frequency;
 
   sine.setFrequency(frequency);
@@ -30,17 +30,17 @@ void subtractive_synthesizer::setFrequency(float frequency) {
   saw.setFrequency(frequency);
 }
 
-void subtractive_synthesizer::setAmplitude(float amplitude) {
+void Subtractive_synthesizer::setAmplitude(float amplitude) {
   this->amplitude = amplitude;
 }
 
-float subtractive_synthesizer::getSample() {
+float Subtractive_synthesizer::getSample() {
   sample = (sine.getSample() + square.getSample() + saw.getSample());
   sample /= 3;
   return sample * amplitude;
 }
 
-void subtractive_synthesizer::tick()  {
+void Subtractive_synthesizer::tick()  {
   sine.tick();
   square.tick();
   saw.tick();

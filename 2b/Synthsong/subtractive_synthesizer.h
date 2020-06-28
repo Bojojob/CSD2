@@ -1,14 +1,13 @@
 #ifndef _SUBTRACTIVE_SYNTHESIZER_H_
 #define _SUBTRACTIVE_SYNTHESIZER_H_
-#include <iostream>
 #include "sine.h"
 #include "square.h"
 #include "saw.h"
 
-class subtractive_synthesizer {
+class Subtractive_synthesizer {
 public:
-  subtractive_synthesizer();
-  ~subtractive_synthesizer();
+  Subtractive_synthesizer();
+  ~Subtractive_synthesizer();
 
   Sine sine;
   Square square;
@@ -19,7 +18,7 @@ public:
   void setAmplitude(float amplitude);
 
   float getSample();
-  
+
   void tick();
 
 protected:

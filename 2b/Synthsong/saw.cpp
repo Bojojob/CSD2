@@ -11,6 +11,6 @@ Saw::~Saw() {
 void Saw::tick() {
 
   phase += frequency / samplerate;
-  sample = ((fmod(phase, 1) * 2) - 1) * amplitude;
-  
+  sample = (((fmod(phase, 1) * 2) - 1) * amplitude);
+
 }
